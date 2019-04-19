@@ -14,7 +14,7 @@ const TextFieldGroup = ({
 		type={type}
 		name={name} 
 		onChange ={onChange}
-		className={classnames("form-control form-control-lg")}
+		className={classnames("form-control form-control-lg text-center")}
 		/>
 	);
 };

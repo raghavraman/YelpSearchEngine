@@ -16,37 +16,37 @@ class Review extends Component {
     const { review } = this.props;
     let stars = [];
     let value = parseInt(review.ratings);
-    console.log(value);
     for (let j = 0; j < value; j++) {
-      stars.push(<i className="fas fa-star" />);
+      stars.push(<i className="fa fa-star" />);
     }
-    console.log(review.ratings);
     if (value !== review.ratings) {
-      stars.push(<i className="fas  fa-star-half" />);
+      stars.push(<i className="fa fa-star-half" />);
     }
     return (
-      <div className="card">
-        <div className="row">
-          <div className="col-md-10">
-            <h3>{review.businessName}</h3>
-          </div>
-          <div className="col-md-2">
-            <div>{stars}</div>
-          </div>
-          <Button
-            onClick={() => this.setState({ open: !open })}
+     <div className="card mt-3 card-header">
+      <div className="row bg-light p-2">
+        <div className="col-md-10" onClick={()=> this.setState({ open: !open })}
             aria-controls="example-collapse-text"
-            aria-expanded={open}
-          >
-            Read More
-          </Button>
-          <Collapse in={this.state.open}>
-            <div id="example-collapse-text">
-              <p>{review.text}</p>
-            </div>
-          </Collapse>
+            aria-expanded={open}>
+            <h4>{review.businessName}</h4>
+        </div>
+        <div className="col-md-2">
+            <div>{stars}</div>
         </div>
       </div>
+      <div className="row tab-content">
+        <Collapse in={this.state.open}>
+            <div id={review.reviewId}>
+                <div className='h6 p-4 text-left'>
+                  <p className="review-text">{review.text}</p>
+                  <p><span className="h5">City:</span>{review.city}</p>
+                  <p><span className="h5">State:</span>{review.state}</p>
+                  <p><span className="h5">Ratings:</span>{review.ratings}</p>
+                </div>
+            </div>
+        </Collapse>
+      </div>
+    </div>
     );
   }
 }
