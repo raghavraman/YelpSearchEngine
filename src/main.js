@@ -4,26 +4,27 @@ import {yelpAPI} from './apis/searchApi';
 import TextFieldGroup from './components/TextFieldGroup';
 import ReviewTable from './components/ReviewTable';
 import PropTypes from 'prop-types';
+
 class Main extends Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
-      searchkey: "",
+      searchkey: ""
     };
-    this.onChange= this.onChange.bind(this);
-    this.onSubmit= this.onSubmit.bind(this);
-    this.sortResults= this.sortResults.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.sortResults = this.sortResults.bind(this);
   }
 
-  onSubmit(e){
+  onSubmit(e) {
     e.preventDefault();
 
     const key = this.state.searchkey;
     this.props.yelpAPI(key);
   }
 
-  onChange(e){
-    this.setState({[e.target.name]: e.target.value});
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   sortResults(){
@@ -33,41 +34,53 @@ class Main extends Component {
   }
 
   sortDescending(property) {
-    console.log(property);
-
-    return function (a,b) {
-        return (a[property] > b[property]) ? -1 : (a[property] < b[property]) ? 1 : 0;
-    }
+    return function(a, b) {
+      return a[property] > b[property] ? -1 : a[property] < b[property] ? 1 : 0;
+    };
   }
 
   render() {
-    const  {yelpResults,loading} =this.props.search;
+    const { yelpResults, loading } = this.props.search;
     let display = "";
-    let sortEnable = ""; 
-    if(loading){
-      display = <p className="lead text-center">"No results found"</p>;
-      sortEnable = "";
+    let sortEnable = "";
+    if (loading) {
+      display = "";
+    } else {
+      display = (
+        <div className="p-3">
+          <p className="h4">{yelpResults.length} results are shown
+          <i className="pl-5 fa fa-sort-amount-up" onClick={this.sortResults} />
+          </p>
+          
+          <ReviewTable reviews={yelpResults} />
+        </div>
+      );
     }
-    else{
-      sortEnable = <i className="fa fa-2x fa-sort-amount-up"onClick = { this.sortResults}/>;
-      display = <ReviewTable reviews = {yelpResults} />;
-
-    }    
     return (
       <div className="container-fluid">
         <form onSubmit={this.onSubmit}>
           <div className="row">
-            <div className="col-md-10 md-auto">        
-              <TextFieldGroup name="searchkey" placeholder="Search Yelp" type="text" value={this.state.searchkey} onChange={this.onChange} />
+            <div className="col-md-10 md-auto">
+              <TextFieldGroup
+                name="searchkey"
+                placeholder="Search Yelp"
+                type="text"
+                value={this.state.searchkey}
+                onChange={this.onChange}
+              />
             </div>
-            <div className="col-md-2 md-auto">        
-              <input type="submit" className="btn btn-primary btn-lg" value="Search" />
+            <div className="col-md-2 md-auto">
+              <input
+                type="submit"
+                className="btn btn-danger btn-lg"
+                value="Search"
+              />
               {sortEnable}
             </div>
           </div>
         </form>
         {display}
-      </div>  
+      </div>
     );
   }
 }
@@ -78,9 +91,9 @@ Main.propTypes = {
 
 const mapStateToProps = state => ({
   search: state.search
-})
+});
 
 export default connect(
   mapStateToProps,
-  {yelpAPI}
-  )(Main);
+  { yelpAPI }
+)(Main);
