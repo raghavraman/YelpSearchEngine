@@ -43,11 +43,13 @@ class Main extends Component {
   render() {
     const  {yelpResults,loading} =this.props.search;
     let display = "";
+    let sortEnable = ""; 
     if(loading){
       display = <p className="lead text-center">"No results found"</p>;
+      sortEnable = "";
     }
     else{
-      console.log("raghav")
+      sortEnable = <i className="fa fa-2x fa-sort-amount-up"onClick = { this.sortResults}/>;
       display = <ReviewTable reviews = {yelpResults} />;
 
     }    
@@ -60,8 +62,7 @@ class Main extends Component {
             </div>
             <div className="col-md-2 md-auto">        
               <input type="submit" className="btn btn-primary btn-lg" value="Search" />
-                <img className="arrow" onClick = { this.sortResults}
-                         src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-down-b-128.png"/>
+              {sortEnable}
             </div>
           </div>
         </form>
