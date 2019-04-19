@@ -16,7 +16,7 @@ class Review extends Component {
       stars.push(<i className="fas  fa-star-half" />);
     }
     return (
-      <div className="card card-body mb-3">
+      <div className="card">
         <div className="row">
           <div className="col-md-10">
             <h3>{review.businessName}</h3>
