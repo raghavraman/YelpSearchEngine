@@ -23,7 +23,7 @@ class Review extends Component {
       stars.push(<i className="fa fa-star-half" />);
     }
     return (
-     <div className="card mt-3 card-header">
+     <div className="card mt-3 card-header shadow p-3 bg-white rounded">
       <div className="row bg-light p-2">
         <div className="col-md-10" onClick={()=> this.setState({ open: !open })}
             aria-controls="example-collapse-text"

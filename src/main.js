@@ -65,7 +65,7 @@ class Main extends Component {
       <div className="container-fluid">
         <form onSubmit={this.onSubmit}>
           <div className="row">
-            <div className="col-md-10 md-auto ml-5">
+            <div className="col-md-10 md-auto">
               <TextFieldGroup
                 name="searchkey"
                 placeholder="Search Yelp"
@@ -74,7 +74,7 @@ class Main extends Component {
                 onChange={this.onChange}
               />
             </div>
-            <div>
+            <div className="col-md-2 md-auto">
               <input
                 type="submit"
                 className="btn btn-danger btn-lg"
