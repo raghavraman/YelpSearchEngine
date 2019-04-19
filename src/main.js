@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {yelpAPI} from './apis/searchApi';
 import TextFieldGroup from './components/TextFieldGroup';
 import ReviewTable from './components/ReviewTable';
-import Review from './components/Review';
 import PropTypes from 'prop-types';
 
 class Main extends Component {
@@ -12,11 +11,9 @@ class Main extends Component {
     this.state = {
       searchkey: ""
     };
-
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.sortResults = this.sortResults.bind(this);
-
   }
 
   onSubmit(e) {
@@ -30,15 +27,13 @@ class Main extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  sortResults() {
-    const { yelpResults, loading } = this.props.search;
-    let res = yelpResults.sort(this.sortDescending("ratings"));
-    this.setState({ yelpResults: res });
+  sortResults(){
+    const  {yelpResults,loading} =this.props.search;
+    let res =  yelpResults.sort(this.sortDescending("ratings"))
+    this.setState({yelpResults: res});
   }
 
   sortDescending(property) {
-    console.log(property);
-
     return function(a, b) {
       return a[property] > b[property] ? -1 : a[property] < b[property] ? 1 : 0;
     };
